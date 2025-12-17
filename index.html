@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bio | Duowq</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --fb-color: #1877F2;
+            --zalo-color: #0068FF;
+            --tele-color: #26A5E4;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Segoe UI', sans-serif; }
+
+        body {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; padding: 20px;
+            overflow: hidden;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            border-radius: 24px; padding: 40px;
+            width: 100%; max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            position: relative; z-index: 10;
+        }
+
+        .avatar-wrapper {
+            position: relative; width: 120px; height: 120px; margin: 0 auto 25px;
+        }
+
+        .avatar {
+            width: 100%; height: 100%; border-radius: 50%;
+            object-fit: cover; border: 4px solid white;
+        }
+
+        .avatar-wrapper::after {
+            content: ''; position: absolute; top: -8px; left: -8px; right: -8px; bottom: -8px;
+            border-radius: 50%; border: 2px dashed rgba(255,255,255,0.8);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate { 100% { transform: rotate(360deg); } }
+
+        h1 { font-size: 24px; color: #333; margin-bottom: 5px; }
+
+        .bio-text { 
+            color: #666; 
+            font-size: 13px; 
+            margin-bottom: 25px; 
+            white-space: nowrap; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .flag-icon {
+            display: inline-block;
+            animation: wave 2s infinite ease-in-out;
+            transform-origin: bottom left;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(15deg); }
+        }
+
+        .links { display: flex; flex-direction: column; gap: 15px; }
+
+        .link-item {
+            display: flex; align-items: center; justify-content: center;
+            padding: 12px; border-radius: 12px; text-decoration: none;
+            color: white; font-weight: 600; font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .link-item i { margin-right: 10px; width: 20px; }
+        .link-item:hover { transform: scale(1.05); filter: brightness(1.1); }
+
+        .facebook { background: var(--fb-color); box-shadow: 0 4px 15px rgba(24, 119, 242, 0.4); }
+        .zalo { background: var(--zalo-color); box-shadow: 0 4px 15px rgba(0, 104, 255, 0.4); }
+        .telegram { background: var(--tele-color); box-shadow: 0 4px 15px rgba(38, 165, 228, 0.4); }
+
+        #music-control {
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            cursor: pointer; background: rgba(255,255,255,0.3);
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(5px); border: 1px solid white;
+            color: white;
+        }
+
+        .footer { margin-top: 30px; font-size: 12px; color: #888; }
+    </style>
+</head>
+<body onclick="playFirstTime()">
+
+    <div id="music-control" onclick="event.stopPropagation(); toggleMusic()">
+        <i id="music-icon" class="fas fa-music"></i>
+    </div>
+    
+    <audio id="myAudio" loop>
+        <source src="https://files.catbox.moe/nmg2gg.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="card">
+        <div class="avatar-wrapper">
+            <img src="https://i.ibb.co/5hQKrx5K/IMG-0275.jpg" alt="Avatar" class="avatar">
+        </div>
+        
+        <h1>Duowq</h1>
+        <p class="bio-text">Dịch Vụ Game Số 1 Việt Nam <span class="flag-icon">🇻🇳</span> ✨</p>
+
+        <div class="links">
+            <a href="https://facebook.com/Ben.Aov.2025" target="_blank" class="link-item facebook">
+                <i class="fab fa-facebook-f"></i> Facebook
+            </a>
+            <a href="https://zalo.me/0799806758" target="_blank" class="link-item zalo">
+                <i class="fas fa-comment-dots"></i> Zalo
+            </a>
+            <a href="https://t.me/hduowq" target="_blank" class="link-item telegram">
+                <i class="fab fa-telegram-plane"></i> Telegram
+            </a>
+        </div>
+
+        <div class="footer">
+            © 2024 Created by Duowq
+        </div>
+    </div>
+
+    <script>
+        // Code Tuyết Rơi
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.innerHTML = '❄';
+            snowflake.style.position = 'fixed';
+            snowflake.style.top = '-20px';
+            snowflake.style.left = Math.random() * window.innerWidth + 'px';
+            snowflake.style.color = 'white';
+            snowflake.style.zIndex = '1';
+            snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+            snowflake.style.opacity = Math.random();
+            snowflake.style.transition = `transform 5s linear, opacity 5s linear`;
+            document.body.appendChild(snowflake);
+            setTimeout(() => {
+                snowflake.style.transform = `translateY(${window.innerHeight + 20}px) rotate(360deg)`;
+                snowflake.style.opacity = '0';
+            }, 100);
+            setTimeout(() => snowflake.remove(), 5000);
+        }
+        setInterval(createSnowflake, 300);
+
+        // Code Nhạc Tự Động khi chạm màn hình
+        var audio = document.getElementById("myAudio");
+        var icon = document.getElementById("music-icon");
+        var hasPlayed = false;
+
+        function playFirstTime() {
+            if (!hasPlayed) {
+                audio.play();
+                icon.classList.replace("fa-music", "fa-pause");
+                hasPlayed = true;
+            }
+        }
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                icon.classList.replace("fa-music", "fa-pause");
+            } else {
+                audio.pause();
+                icon.classList.replace("fa-pause", "fa-music");
+            }
+        }
+    </script>
+</body>
+</html>

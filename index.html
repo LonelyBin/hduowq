@@ -1,90 +1,90 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Duowq | Portfolio Cyberpunk - Developer & Creator</title>
-    <meta name="description" content="Portfolio độc đáo theo phong cách cyberpunk của Duowq. Nơi sáng tạo code gặp gỡ hiệu ứng hình ảnh ấn tượng.">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="https://i.ibb.co/5hQKrx5K/IMG-0275.jpg">
-    
-    <!-- Open Graph Meta Tags (Tối ưu chia sẻ lên MXH) -->
-    <meta property="og:title" content="Duowq | Portfolio Cyberpunk">
-    <meta property="og:description" content="Xem portfolio độc đáo và follow TikTok @duowq.official">
-    <meta property="og:image" content="https://i.ibb.co/5hQKrx5K/IMG-0275.jpg">
-    <meta property="og:url" content="https://lonelybin.github.io/hduowq/">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- File CSS riêng -->
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duowq iOS UI</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{height:100vh;display:flex;justify-content:center;align-items:center;background:#f2f2f7;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif}
+.card{width:350px;padding:20px;border-radius:30px;background:rgba(255,255,255,0.7);backdrop-filter:blur(30px);box-shadow:0 10px 40px rgba(0,0,0,0.1)}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.avatar{width:84px;height:84px;border-radius:100%;display:block;margin:0 auto;object-fit:cover;position:relative;z-index:1}
+.avatar::before{content:"";position:absolute;inset:-100px;border-radius:10%;background:conic-gradient(red,orange,yellow,lime,cyan,blue,violet,red);animation:spin 2s linear infinite;z-index:0;filter:blur(0.6px) saturate(1.2)}
+.avatar::after{content:"";position:absolute;inset:3px;background:#fff;border-radius:30%;z-index:1}
+.title{text-align:center;font-size:30px;font-weight:6000;margin-bottom:4px}
+.status{text-align:center;font-size:13px;color:#34c759;margin-bottom:18px}
+.bio{text-align:center;font-size:14px;color:#FF3300;margin-bottom:16px}
+.links{display:flex;flex-direction:column;gap:12px}
+.links a{height:56px;padding:0 16px;border-radius:16px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;color:#000;font-size:15px;font-weight:500;position:relative;overflow:hidden}
+.links a::before{content:"";position:absolute;inset:-3px;border-radius:18px;background:conic-gradient(red,orange,yellow,lime,cyan,blue,violet,red);animation:spin 3s linear infinite;z-index:0;filter:blur(0.5px) saturate(1.2)}
+.links a::after{content:"";position:absolute;inset:3px;background:#fff;border-radius:14px;z-index:1}
+.links a span{position:relative;z-index:2;display:flex;align-items:center;gap:12px}
+.links a i{width:20px;text-align:center}
+.links a>*{position:relative;z-index:2}
+.links a:active{transform:scale(0.96)}
+.ripple{position:absolute;width:20px;height:20px;background:rgba(0,0,0,0.08);border-radius:50%;transform:translate(-50%,-50%);animation:r .5s linear;z-index:3}
+@keyframes r{to{width:220px;height:220px;opacity:0}}
+</style>
 </head>
 
-<body data-audio-initialized="false">
-    <canvas id="matrix-canvas"></canvas>
-    <canvas id="cursor-canvas"></canvas>
-    <div class="scanline"></div>
+<body>
 
-    <button id="audio-toggle" class="control-btn" aria-label="Bật/tắt nhạc nền">
-        [AUDIO: <span id="audio-status">OFF</span>]
-    </button>
+<div class="card">
 
-    <div id="fps-display" class="control-btn">FPS: <span id="fps-value">0</span></div>
+<img src="avatar.jpg" class="avatar">
 
-    <audio id="background-music" loop preload="auto">
-        <source src="https://files.catbox.moe/mi1xvx.mp3" type="audio/mpeg">
-        Trình duyệt của bạn không hỗ trợ audio.
-    </audio>
+<h1 class="title">aka Duowq</h1>
+<p class="status">● Online</p>
+<p class="bio">SP: iOS & Android</p>
 
-    <main class="card">
-        <div class="avatar-container">
-            <img src="https://i.ibb.co/5hQKrx5K/IMG-0275.jpg" alt="Avatar của Duowq - Ảnh đại diện" class="avatar">
-        </div>
-        
-        <h1 class="glitch-text" data-text="DUOWQ">DUOWQ</h1>
-        
-        <div class="tags">
-            <span class="tag">Uy Tín</span>
-            <span class="tag">Bảo Mật</span>
-            <span class="tag">An Toàn</span>
-        </div>
-        
-        <p class="intro">
-            > Chào Mừng Bạn Đến Với Profile Của Tôi.<br>
-            > Liên Hệ Với Tôi Qua Những MXH Bên Dưới.
-        </p>
-        
-        <p class="status-text">&gt; Đang Nhập...</p>
-        
-        <div class="links">
-            <!-- REVIEW HAX -->
-            <a href="https://lonelybin.github.io/reviewhax/" target="_blank" aria-label="Xem Review Hax">
-                <i class="fas fa-code"></i> Review Hax
-            </a>
-            
-            <!-- TIKTOK (ĐÃ THAY THẾ GITHUB) -->
-            <a href="https://www.tiktok.com/@duongw85d1" target="_blank" aria-label="TikTok của tôi">
-                <i class="fab fa-tiktok"></i> TikTok
-            </a>
-            
-            <!-- FACEBOOK -->
-            <a href="https://facebook.com/Ben.Aov.2025" target="_blank" aria-label="Facebook cá nhân">
-                <i class="fab fa-facebook"></i> Facebook
-            </a>
-            
-            <!-- ZALO -->
-            <a href="https://zalo.me/0799806758" target="_blank" aria-label="Kết nối Zalo">
-                <i class="fas fa-phone-alt"></i> Zalo
-            </a>
-            
-            <!-- TELEGRAM -->
-            <a href="https://t.me/hduowq" target="_blank" aria-label="Kênh Telegram">
-                <i class="fab fa-telegram"></i> Telegram
-            </a>
-        </div>
-    </main>
+<div class="links">
 
-    <script src="script.js"></script>
+<a href="https://www.tiktok.com/@duongw85d1" target="_blank">
+<span><i class="fab fa-tiktok"></i>TikTok</span>
+</a>
+
+<a href="https://facebook.com/Ben.Aov.2025" target="_blank">
+<span><i class="fab fa-facebook"></i>Facebook</span>
+</a>
+
+<a href="https://zalo.me/0799806758" target="_blank">
+<span><i class="fas fa-gun"></i>Zalo</span>
+</a>
+
+<a href="https://t.me/hduowq" target="_blank">
+<span><i class="fab fa-telegram"></i>Telegram</span>
+</a>
+
+</div>
+</div>
+
+<script>
+(function(_0x1a2b){
+    const _0xfn=function(_0xe){
+        return atob(_0xe);
+    };
+    document[_0xfn("cXVlcnlTZWxlY3RvckFsbA==")](_0xfn("LmxpbmtzIGE="))
+    [_0xfn("Zm9yRWFjaA==")](_0xbtn=>{
+        _0xbtn[_0xfn("YWRkRXZlbnRMaXN0ZW5lcg==")](_0xfn("Y2xpY2s="),function(_0xe){
+            let _0xx=_0xe[_0xfn("Y2xpZW50WA==")];
+            let _0xy=_0xe[_0xfn("Y2xpZW50WQ==")];
+
+            let _0xr=document[_0xfn("Y3JlYXRlRWxlbWVudA==")]("span");
+            _0xr[_0xfn("Y2xhc3NOYW1l")]=_0xfn("cmlwcGxl");
+
+            let _0xrect=this[_0xfn("Z2V0Qm91bmRpbmdDbGllbnRSZWN0")]();
+            _0xr.style.left=(_0xx-_0xrect.left)+"px";
+            _0xr.style.top=(_0xy-_0xrect.top)+"px";
+
+            this.appendChild(_0xr);
+        });
+    });
+})();
+</script>
+
 </body>
 </html>

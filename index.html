@@ -1,90 +1,413 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Duowq iOS UI</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Profile & Sản phẩm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+      background: linear-gradient(145deg, #0b0b1a 0%, #1a1a2e 40%, #0f0f1f 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      margin: 0;
+      position: relative;
+      overflow-x: hidden;
+    }
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{height:100vh;display:flex;justify-content:center;align-items:center;background:#f2f2f7;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif}
-.card{width:350px;padding:20px;border-radius:30px;background:rgba(255,255,255,0.7);backdrop-filter:blur(30px);box-shadow:0 10px 40px rgba(0,0,0,0.1)}
-@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-.avatar{width:84px;height:84px;border-radius:100%;display:block;margin:0 auto;object-fit:cover;position:relative;z-index:1}
-.avatar::before{content:"";position:absolute;inset:-100px;border-radius:10%;background:conic-gradient(red,orange,yellow,lime,cyan,blue,violet,red);animation:spin 2s linear infinite;z-index:0;filter:blur(0.6px) saturate(1.2)}
-.avatar::after{content:"";position:absolute;inset:3px;background:#fff;border-radius:30%;z-index:1}
-.title{text-align:center;font-size:30px;font-weight:6000;margin-bottom:4px}
-.status{text-align:center;font-size:13px;color:#34c759;margin-bottom:18px}
-.bio{text-align:center;font-size:14px;color:#FF3300;margin-bottom:16px}
-.links{display:flex;flex-direction:column;gap:12px}
-.links a{height:56px;padding:0 16px;border-radius:16px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;color:#000;font-size:15px;font-weight:500;position:relative;overflow:hidden}
-.links a::before{content:"";position:absolute;inset:-3px;border-radius:18px;background:conic-gradient(red,orange,yellow,lime,cyan,blue,violet,red);animation:spin 3s linear infinite;z-index:0;filter:blur(0.5px) saturate(1.2)}
-.links a::after{content:"";position:absolute;inset:3px;background:#fff;border-radius:14px;z-index:1}
-.links a span{position:relative;z-index:2;display:flex;align-items:center;gap:12px}
-.links a i{width:20px;text-align:center}
-.links a>*{position:relative;z-index:2}
-.links a:active{transform:scale(0.96)}
-.ripple{position:absolute;width:20px;height:20px;background:rgba(0,0,0,0.08);border-radius:50%;transform:translate(-50%,-50%);animation:r .5s linear;z-index:3}
-@keyframes r{to{width:220px;height:220px;opacity:0}}
-</style>
+    body::before {
+      content: "";
+      position: fixed;
+      top: -20%;
+      left: -10%;
+      width: 70%;
+      height: 70%;
+      background: radial-gradient(circle at 30% 30%, rgba(100, 130, 255, 0.25), transparent 60%);
+      filter: blur(70px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      bottom: -15%;
+      right: -5%;
+      width: 70%;
+      height: 70%;
+      background: radial-gradient(circle at 70% 80%, rgba(255, 130, 180, 0.2), transparent 60%);
+      filter: blur(80px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 700px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ===== THẺ PROFILE ===== */
+    .profile-card {
+      backdrop-filter: blur(35px) saturate(180%);
+      -webkit-backdrop-filter: blur(35px) saturate(180%);
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 44px;
+      padding: 32px 24px 28px;
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .avatar-wrapper {
+      width: 110px;
+      height: 110px;
+      margin-bottom: 18px;
+    }
+
+    .avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: linear-gradient(135deg, #a5b4fc, #f9a8d4);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 0 4px rgba(255, 255, 255, 0.15);
+      display: block;
+    }
+
+    .username {
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.3px;
+      margin-bottom: 4px;
+    }
+
+    .handle {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.65);
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+
+    .bio {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 15px;
+      line-height: 1.5;
+      max-width: 260px;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+
+    .stats {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      margin: 8px 0 18px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-number {
+      font-weight: 700;
+      font-size: 20px;
+      color: white;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.55);
+      font-weight: 500;
+    }
+
+    .contact-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-top: 8px;
+      flex-wrap: nowrap;
+    }
+
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 0;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      color: white;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.25s;
+      cursor: pointer;
+      background: rgba(45, 45, 65, 0.5);
+      flex: 1;
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-facebook {
+      background: rgba(24, 119, 242, 0.25);
+      border-color: rgba(24, 119, 242, 0.5);
+    }
+    .btn-facebook:hover {
+      background: rgba(24, 119, 242, 0.45);
+    }
+
+    .btn-zalo {
+      background: rgba(0, 119, 255, 0.25);
+      border-color: rgba(0, 140, 255, 0.5);
+    }
+    .btn-zalo:hover {
+      background: rgba(0, 140, 255, 0.45);
+    }
+
+    .btn-telegram {
+      background: rgba(0, 136, 204, 0.25);
+      border-color: rgba(0, 160, 230, 0.5);
+    }
+    .btn-telegram:hover {
+      background: rgba(0, 160, 230, 0.45);
+    }
+
+    /* ===== THẺ SẢN PHẨM ===== */
+    .product-card {
+      backdrop-filter: blur(35px) saturate(180%);
+      -webkit-backdrop-filter: blur(35px) saturate(180%);
+      background: rgba(20, 20, 30, 0.55);
+      border-radius: 44px;
+      padding: 26px 22px 30px;
+      box-shadow: 0 35px 55px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      color: white;
+    }
+
+    .product-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .product-header span {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 14px;
+      color: #ffbb88;
+    }
+
+    .product-image-container {
+      width: 100%;
+      height: 220px;
+      border-radius: 28px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 28px;
+    }
+
+    .product-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .product-desc {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .price-tag {
+      background: #fff;
+      color: #0b0b1a;
+      display: inline-block;
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .section-label {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 400px) {
+      .contact-btn {
+        font-size: 12px;
+        gap: 4px;
+      }
+      .product-image-container {
+        height: 180px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="container">
+    <div class="profile-card">
+      <div class="avatar-wrapper">
+        <img id="avatarImage" class="avatar"
+             src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%234f46e5'/%3E%3Ctext x='50' y='70' font-size='52' text-anchor='middle' fill='white' font-family='Arial'%3E🐱%3C/text%3E%3C/svg%3E"
+             alt="avatar"
+             data-default="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%234f46e5'/%3E%3Ctext x='50' y='70' font-size='52' text-anchor='middle' fill='white' font-family='Arial'%3E🐱%3C/text%3E%3C/svg%3E">
+      </div>
+      <div class="username">aka Duowq</div>
+      <div class="handle">@duowq85d1</div>
+      <div class="bio">PUBG-CFL-AOV!<br> Lướt Xuống Để Xem Thêm!</div>
 
-<div class="card">
+      <div class="section-label">📞 Liên hệ với tôi</div>
+      <div class="contact-row">
+        <a href="https://facebook.com/racingboy.bin.1" target="_blank" rel="noopener" class="contact-btn btn-facebook">Facebook</a>
+        <a href="https://zalo.me/0799806758" target="_blank" rel="noopener" class="contact-btn btn-zalo">Zalo</a>
+        <a href="https://t.me/hduowq" target="_blank" rel="noopener" class="contact-btn btn-telegram">Telegram</a>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-header">Sản phẩm nổi bật <span>CFL</span></div>
+      <div class="product-image-container">
+        <img class="product-img"
+             src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%232d2d3f'/%3E%3Ctext x='200' y='110' font-size='18' text-anchor='middle' fill='%23aaa'%3ESản phẩm 1%3C/text%3E%3C/svg%3E"
+             alt="Sản phẩm 1"
+             data-default="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%232d2d3f'/%3E%3Ctext x='200' y='110' font-size='18' text-anchor='middle' fill='%23aaa'%3ESản phẩm 1%3C/text%3E%3C/svg%3E"
+             data-files="product.jpg,product.png,product.jpeg,product.webp">
+      </div>
+      <div class="product-info">
+        <div class="product-title">Bảng Điều Chỉnh Thông Minh</div>
+        <div class="product-desc">Công cụ giúp cãi thiện kỹ năng tầm cao mới.
+gồm có nhưng tín năng vượt trội như Aimbot,ESP đánh dấu mục tiêu,hệ thống antiban cao cấp</div>
+        <div class="price-tag">(150.000/Tuần)  (250.000/Tháng)</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-header">Bảng Điều Chỉnh <span>PUBG MOBILE</span></div>
+      <div class="product-image-container">
+        <img class="product-img"
+             src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%232d2d3f'/%3E%3Ctext x='200' y='110' font-size='18' text-anchor='middle' fill='%23aaa'%3ESản phẩm 2%3C/text%3E%3C/svg%3E"
+             alt="Sản phẩm 2"
+             data-default="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%232d2d3f'/%3E%3Ctext x='200' y='110' font-size='18' text-anchor='middle' fill='%23aaa'%3ESản phẩm 2%3C/text%3E%3C/svg%3E"
+             data-files="product2.jpg,product2.png,product2.jpeg,product2.webp">
+      </div>
+      <div class="product-info">
+        <div class="product-title">Bảng Điều Chỉnh Pro Dành Cho PUBG Mobile</div>
+        <div class="product-desc">Rất Nhiều Tính Năng Chờ Bạn Khám Phá và hơn hết Antiban giúp bạn leo rank không phải thấp thom lo âu và có 3 loại ESP khác nhau.</div>
+        <div class="price-tag">200.000VNĐ THÁNG</div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-header">Bảng Điều Chỉnh <span> Liên Quân</span></div>
+      <div class="product-image-container">
+        <img class="product-img"
+             src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%232d2d3f'/%3E%3Ctext x='200' y='110' font-size='18' text-anchor='middle' fill='%23aaa'%3ESản phẩm 3%3C/text%3E%3C/svg%3E"
+             alt="Sản phẩm 3"
+             data-default="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%232d2d3f'/%3E%3Ctext x='200' y='110' font-size='18' text-anchor='middle' fill='%23aaa'%3ESản phẩm 3%3C/text%3E%3C/svg%3E"
+             data-files="product3.jpg,product3.png,product3.jpeg,product3.webp">
+      </div>
+      <div class="product-info">
+        <div class="product-title"> Bảng Điều Chỉnh Liên Quân</div>
+        <div class="product-desc"> Hỗ Trợ ESP ẩn Khi Quay Video hoặc live rất phù hợp với những bạn thích live và làm idol hệ thống antiban cao cấp.</div>
+        <div class="price-tag">200.000VNĐ THÁNG</div>
+      </div>
+    </div>
 
-<img src="avatar.jpg" class="avatar">
+  </div>
 
-<h1 class="title">aka Duowq</h1>
-<p class="status">SP: 7H - 22H</p>
-<p class="bio">iOS & Android</p>
+  <script>
+    (function() {
+      const avatarImage = document.getElementById('avatarImage');
+      const AVATAR_FILES = ['avatar.jpg', 'avatar.png', 'avatar.jpeg', 'avatar.webp', 'avatar.gif'];
+      const avatarDefault = avatarImage.getAttribute('data-default');
 
-<div class="links">
+      function tryLoadImage(imgElement, fileList, defaultSrc) {
+        let index = 0;
+        function tryNext() {
+          if (index >= fileList.length) {
+            imgElement.src = defaultSrc;
+            imgElement.style.display = 'block';
+            return;
+          }
+          const testImg = new Image();
+          testImg.onload = function() {
+            imgElement.src = fileList[index];
+            imgElement.style.display = 'block';
+          };
+          testImg.onerror = function() {
+            index++;
+            tryNext();
+          };
+          testImg.src = fileList[index];
+        }
+        tryNext();
+      }
 
-<a href="https://www.tiktok.com/@duongw85d1" target="_blank">
-<span><i class="fab fa-tiktok"></i>TikTok</span>
-</a>
+      tryLoadImage(avatarImage, AVATAR_FILES, avatarDefault);
 
-<a href="https://facebook.com/Ben.Aov.2025" target="_blank">
-<span><i class="fab fa-facebook"></i>Facebook</span>
-</a>
-
-<a href="https://zalo.me/0799806758" target="_blank">
-<span><i class="fas fa-gun"></i>Zalo</span>
-</a>
-
-<a href="https://t.me/hduowq" target="_blank">
-<span><i class="fab fa-telegram"></i>Telegram</span>
-</a>
-
-</div>
-</div>
-
-<script>
-(function(_0x1a2b){
-    const _0xfn=function(_0xe){
-        return atob(_0xe);
-    };
-    document[_0xfn("cXVlcnlTZWxlY3RvckFsbA==")](_0xfn("LmxpbmtzIGE="))
-    [_0xfn("Zm9yRWFjaA==")](_0xbtn=>{
-        _0xbtn[_0xfn("YWRkRXZlbnRMaXN0ZW5lcg==")](_0xfn("Y2xpY2s="),function(_0xe){
-            let _0xx=_0xe[_0xfn("Y2xpZW50WA==")];
-            let _0xy=_0xe[_0xfn("Y2xpZW50WQ==")];
-
-            let _0xr=document[_0xfn("Y3JlYXRlRWxlbWVudA==")]("span");
-            _0xr[_0xfn("Y2xhc3NOYW1l")]=_0xfn("cmlwcGxl");
-
-            let _0xrect=this[_0xfn("Z2V0Qm91bmRpbmdDbGllbnRSZWN0")]();
-            _0xr.style.left=(_0xx-_0xrect.left)+"px";
-            _0xr.style.top=(_0xy-_0xrect.top)+"px";
-
-            this.appendChild(_0xr);
-        });
-    });
-})();
-</script>
-
+      const allProductImgs = document.querySelectorAll('.product-img');
+      allProductImgs.forEach(function(img) {
+        const filesAttr = img.getAttribute('data-files');
+        const defaultSrc = img.getAttribute('data-default');
+        if (filesAttr) {
+          const filesList = filesAttr.split(',').map(f => f.trim());
+          tryLoadImage(img, filesList, defaultSrc);
+        }
+      });
+      console.log('Duowq');
+    })();
+  </script>
 </body>
 </html>

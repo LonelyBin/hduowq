@@ -1,413 +1,350 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Profile & Sản phẩm</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
-      background: linear-gradient(145deg, #0b0b1a 0%, #1a1a2e 40%, #0f0f1f 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      margin: 0;
-      position: relative;
-      overflow-x: hidden;
-    }
+<title>BIO</title>
 
-    body::before {
-      content: "";
-      position: fixed;
-      top: -20%;
-      left: -10%;
-      width: 70%;
-      height: 70%;
-      background: radial-gradient(circle at 30% 30%, rgba(100, 130, 255, 0.25), transparent 60%);
-      filter: blur(70px);
-      z-index: 0;
-      pointer-events: none;
-    }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+}
 
-    body::after {
-      content: "";
-      position: fixed;
-      bottom: -15%;
-      right: -5%;
-      width: 70%;
-      height: 70%;
-      background: radial-gradient(circle at 70% 80%, rgba(255, 130, 180, 0.2), transparent 60%);
-      filter: blur(80px);
-      z-index: 0;
-      pointer-events: none;
-    }
+body{
+    background: linear-gradient(135deg, #f4f6f8 0%, #e9ecef 100%);
+    color:#111;
+    overflow-x:hidden;
+    min-height: 100vh;
+}
 
-    .container {
-      width: 100%;
-      max-width: 700px;
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-      position: relative;
-      z-index: 2;
-    }
+/* Nền glow (đổi sang màu sáng nhẹ để không bị tối) */
+.bg1,.bg2{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(120px);
+    z-index:-1;
+}
 
-    /* ===== THẺ PROFILE ===== */
-    .profile-card {
-      backdrop-filter: blur(35px) saturate(180%);
-      -webkit-backdrop-filter: blur(35px) saturate(180%);
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 44px;
-      padding: 32px 24px 28px;
-      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.12);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
+.bg1{
+    width:350px;
+    height:350px;
+    background:#a1c4fd; /* Xanh nhạt */
+    top:-80px;
+    left:-80px;
+    opacity:.3;
+}
 
-    .avatar-wrapper {
-      width: 110px;
-      height: 110px;
-      margin-bottom: 18px;
-    }
+.bg2{
+    width:350px;
+    height:350px;
+    background:#c2e9fb; /* Xanh mint nhạt */
+    bottom:-100px;
+    right:-80px;
+    opacity:.3;
+}
 
-    .avatar {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      object-fit: cover;
-      background: linear-gradient(135deg, #a5b4fc, #f9a8d4);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 0 4px rgba(255, 255, 255, 0.15);
-      display: block;
-    }
+/* banner */
+.banner{
+    width:100%;
+    height:230px;
+    object-fit:cover;
+    display:block;
+}
 
-    .username {
-      font-size: 26px;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: -0.3px;
-      margin-bottom: 4px;
-    }
+/* container */
+.container{
+    width:90%;
+    max-width:850px;
+    margin:auto;
+    margin-top:-70px;
+    padding-bottom:60px;
+}
 
-    .handle {
-      font-size: 16px;
-      color: rgba(255, 255, 255, 0.65);
-      margin-bottom: 16px;
-      font-weight: 500;
-    }
+/* card (Khung kính mờ nhưng màu sáng) */
+.card{
+    background:rgba(255,255,255,0.7); /* Kính trắng */
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,0.9);
+    border-radius:30px;
+    padding:30px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
 
-    .bio {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 15px;
-      line-height: 1.5;
-      max-width: 260px;
-      margin-bottom: 20px;
-      font-weight: 400;
-    }
+/* avatar */
+.avatar{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid #fff;
+    margin-top:-90px;
+    background:#eee;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
 
-    .stats {
-      display: flex;
-      gap: 32px;
-      justify-content: center;
-      margin: 8px 0 18px;
-    }
+/* text */
+.name{
+    margin-top:18px;
+    font-size:34px;
+    font-weight:800;
+    color: #111;
+}
 
-    .stat-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+/* Thêm dòng chữ phụ giống ảnh */
+.sub-text {
+    font-size: 15px;
+    color: #666;
+    margin-top: 6px;
+}
 
-    .stat-number {
-      font-weight: 700;
-      font-size: 20px;
-      color: white;
-    }
+.sub-text:last-of-type {
+    margin-bottom: 25px;
+}
 
-    .stat-label {
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.55);
-      font-weight: 500;
-    }
+.role{
+    margin-top:8px;
+    color:#555;
+    font-size:15px;
+    font-weight: 600;
+}
 
-    .contact-row {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      margin-top: 8px;
-      flex-wrap: nowrap;
-    }
+.desc{
+    margin-top:24px;
+    line-height:1.8;
+    color:#444;
+    font-size:15px;
+}
 
-    .contact-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 10px 0;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 14px;
-      text-decoration: none;
-      color: white;
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: all 0.25s;
-      cursor: pointer;
-      background: rgba(45, 45, 65, 0.5);
-      flex: 1;
-    }
+/* Nút Review Menu màu bạc (Giống ảnh) */
+.btn-review {
+    width: 100%;
+    max-width: 320px;
+    padding: 16px;
+    border: 1px solid rgba(0,0,0,0.05);
+    border-radius: 18px;
+    background: linear-gradient(180deg, #fdfdfd 0%, #d4d4d4 100%);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 4px 12px rgba(0, 0, 0, 0.08);
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 30px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
 
-    .contact-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-    }
+.btn-review:active {
+    transform: scale(0.97);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-    .btn-facebook {
-      background: rgba(24, 119, 242, 0.25);
-      border-color: rgba(24, 119, 242, 0.5);
-    }
-    .btn-facebook:hover {
-      background: rgba(24, 119, 242, 0.45);
-    }
+/* Icon mạng xã hội */
+.social-links {
+    display: flex;
+    gap: 25px;
+}
 
-    .btn-zalo {
-      background: rgba(0, 119, 255, 0.25);
-      border-color: rgba(0, 140, 255, 0.5);
-    }
-    .btn-zalo:hover {
-      background: rgba(0, 140, 255, 0.45);
-    }
+.social-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 16px;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s;
+    text-decoration: none;
+}
 
-    .btn-telegram {
-      background: rgba(0, 136, 204, 0.25);
-      border-color: rgba(0, 160, 230, 0.5);
-    }
-    .btn-telegram:hover {
-      background: rgba(0, 160, 230, 0.45);
-    }
+.social-icon:hover {
+    background-color: #e4e6e9;
+}
 
-    /* ===== THẺ SẢN PHẨM ===== */
-    .product-card {
-      backdrop-filter: blur(35px) saturate(180%);
-      -webkit-backdrop-filter: blur(35px) saturate(180%);
-      background: rgba(20, 20, 30, 0.55);
-      border-radius: 44px;
-      padding: 26px 22px 30px;
-      box-shadow: 0 35px 55px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      color: white;
-    }
+.social-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: #333;
+}
 
-    .product-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-      font-weight: 600;
-      font-size: 18px;
-      color: rgba(255, 255, 255, 0.9);
-    }
+/* POST (Đổi sang khung kính trắng) */
+.post{
+    margin-top:30px;
+    padding:18px;
+    border-radius:26px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.9);
+    transition:.25s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
 
-    .product-header span {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 6px 14px;
-      border-radius: 30px;
-      font-size: 14px;
-      color: #ffbb88;
-    }
+.post:hover{
+    transform: translateY(-4px);
+    background: rgba(255,255,255,0.9);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+}
 
-    .product-image-container {
-      width: 100%;
-      height: 220px;
-      border-radius: 28px;
-      overflow: hidden;
-      background: rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 24px;
-    }
+.post img{
+    width:100%;
+    border-radius:18px;
+    margin-bottom:16px;
+    object-fit:cover;
+}
 
-    .product-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      border-radius: 28px;
-    }
+.post h2{
+    font-size:24px;
+    margin-bottom:12px;
+    color: #111;
+}
 
-    .product-title {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
+.post p{
+    color:#555;
+    line-height:1.8;
+    font-size:15px;
+}
 
-    .product-desc {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 14px;
-      line-height: 1.5;
-      margin-bottom: 16px;
-    }
+/* gallery */
+.gallery{
+    margin-top:35px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:16px;
+}
 
-    .price-tag {
-      background: #fff;
-      color: #0b0b1a;
-      display: inline-block;
-      padding: 8px 20px;
-      border-radius: 30px;
-      font-weight: 700;
-      font-size: 16px;
-    }
+/* nhiều ảnh trong post */
+.post-gallery{
+    margin-top:18px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:12px;
+}
 
-    .section-label {
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.5);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
+.post-gallery img{
+    width:100%;
+    height:140px;
+    object-fit:cover;
+    border-radius:16px;
+    transition:.25s;
+    margin-bottom: 0;
+}
 
-    @media (max-width: 400px) {
-      .contact-btn {
-        font-size: 12px;
-        gap: 4px;
-      }
-      .product-image-container {
-        height: 180px;
-      }
-    }
-  </style>
+.post-gallery img:hover{
+    transform: scale(1.04);
+}
+
+</style>
 </head>
 <body>
-  <div class="container">
-    <div class="profile-card">
-      <div class="avatar-wrapper">
-        <img id="avatarImage" class="avatar"
-             src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%234f46e5'/%3E%3Ctext x='50' y='70' font-size='52' text-anchor='middle' fill='white' font-family='Arial'%3E🐱%3C/text%3E%3C/svg%3E"
-             alt="avatar"
-             data-default="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%234f46e5'/%3E%3Ctext x='50' y='70' font-size='52' text-anchor='middle' fill='white' font-family='Arial'%3E🐱%3C/text%3E%3C/svg%3E">
-      </div>
-      <div class="username">aka Duowq</div>
-      <div class="handle">@duowq85d1</div>
-      <div class="bio">PUBG-CFL-AOV!<br> Lướt Xuống Để Xem Thêm!</div>
 
-      <div class="section-label">📞 Liên hệ với tôi</div>
-      <div class="contact-row">
-        <a href="https://facebook.com/racingboy.bin.1" target="_blank" rel="noopener" class="contact-btn btn-facebook">Facebook</a>
-        <a href="https://zalo.me/0799806758" target="_blank" rel="noopener" class="contact-btn btn-zalo">Zalo</a>
-        <a href="https://t.me/hduowq" target="_blank" rel="noopener" class="contact-btn btn-telegram">Telegram</a>
-      </div>
+<div class="bg1"></div>
+<div class="bg2"></div>
+
+<!-- banner local -->
+<img class="banner" src="https://i.imgur.com/hNGb5Q8.jpeg">
+
+<div class="container">
+
+    <div class="card">
+
+        <!-- avatar local -->
+        <img class="avatar" src="https://i.imgur.com/G2P9uIK.jpeg">
+
+        <div class="name">Giàng A Dương</div>
+        
+        <!-- Thêm 2 dòng text giống ảnh mẫu -->
+        <div class="sub-text">🫆</div>
+        <div class="sub-text">SP : 7H00-23H00 (UTC+7)</div>
+
+        <div class="role">
+            Liện Hệ Với Mình Với Các MXH</div>
+
+
+        <!-- 3 Icon Social giống ảnh -->
+        <div class="social-links" style="margin-bottom: 25px;">
+            <!-- Facebook -->
+            <a href="#" class="social-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg>
+            </a>
+            
+            <!-- Zalo -->
+            <a href="#" class="social-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.5 16.5H7.5V14.5L12.5 8H8V6H16V8L11 14.5H16.5V16.5Z" fill="#0068FF"/>
+                </svg>
+            </a>
+
+            <!-- Telegram -->
+            <a href="#" class="social-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.64 8.8C16.49 10.38 15.84 14.22 15.51 15.99C15.37 16.74 15.09 16.99 14.82 17.02C14.25 17.07 13.81 16.64 13.26 16.27C12.41 15.71 11.92 15.35 11.09 14.81C10.13 14.18 10.76 13.83 11.31 13.26C11.46 13.11 13.97 10.82 14.02 10.61C14.03 10.58 14.03 10.55 14.02 10.53C14.01 10.51 13.98 10.5 13.94 10.5C13.89 10.5 13.81 10.52 13.75 10.55C13.47 10.65 10.13 12.85 9.9 12.99C9.68 13.13 9.48 13.19 9.28 13.19C9.07 13.19 8.66 13.08 8.35 12.98C7.98 12.86 7.69 12.79 7.71 12.58C7.73 12.37 7.96 12.26 8.31 12.14C11.94 10.56 14.39 9.51 15.69 8.99C15.93 8.89 16.56 8.67 16.79 8.73C16.87 8.75 16.9 8.81 16.9 8.91C16.9 8.95 16.9 8.9 16.64 8.8Z"/></svg>
+            </a>
+        </div>
+
+        <div class="desc" style="margin-top: 0; text-align: left; width: 100%;">
+            Xin chào 👋<br><br>
+            Chào mừng bạn đến với link bio của mình không biết bạn cần gì nào?
+        </div>
+        
+    </div><!-- Kết thúc card -->
+
+    <!-- bài viết 1 -->
+    <div class="post">
+        <h2>Menu OASIS PUBGM ✦</h2>
+        <p>
+          OASIS là một bảng điều chỉnh thông mình được nhiều idol sử dụng vì tính ổn định và an toàn
+        </p>
+        <div class="post-gallery">
+            <img src="https://i.imgur.com/nsy1uTf.jpeg">
+            <img src="https://i.imgur.com/PRx2r28.jpeg">
+            <img src="https://i.imgur.com/6AT4h9s.jpeg">
+            <img src="https://i.imgur.com/YeZQftq.jpeg">
+        </div>
     </div>
-    <div class="product-card">
-      <div class="product-header">Sản phẩm nổi bật <span>CFL</span></div>
-      <div class="product-image-container">
-        <img class="product-img"
-             src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%232d2d3f'/%3E%3Ctext x='200' y='110' font-size='18' text-anchor='middle' fill='%23aaa'%3ESản phẩm 1%3C/text%3E%3C/svg%3E"
-             alt="Sản phẩm 1"
-             data-default="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%232d2d3f'/%3E%3Ctext x='200' y='110' font-size='18' text-anchor='middle' fill='%23aaa'%3ESản phẩm 1%3C/text%3E%3C/svg%3E"
-             data-files="product.jpg,product.png,product.jpeg,product.webp">
-      </div>
-      <div class="product-info">
-        <div class="product-title">Bảng Điều Chỉnh Thông Minh</div>
-        <div class="product-desc">Công cụ giúp cãi thiện kỹ năng tầm cao mới.
-gồm có nhưng tín năng vượt trội như Aimbot,ESP đánh dấu mục tiêu,hệ thống antiban cao cấp</div>
-        <div class="price-tag">(150.000/Tuần)  (250.000/Tháng)</div>
-      </div>
+
+    <!-- bài viết 2 -->
+    <div class="post">
+        <h2>Liên Quân Mobile</h2>
+Liên Quân Mobile với Menu ESP hiện đại antiban siêu ổn định và được rất nhiều thách đấu tin dùng nhiều chức năng hot hòn họt như aimbot share MINIMAP cho đồng đội và unlock all skin.
+        <img src="https://i.imgur.com/KP0RtPa.jpeg">
+        </p>
     </div>
-    <div class="product-card">
-      <div class="product-header">Bảng Điều Chỉnh <span>PUBG MOBILE</span></div>
-      <div class="product-image-container">
-        <img class="product-img"
-             src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%232d2d3f'/%3E%3Ctext x='200' y='110' font-size='18' text-anchor='middle' fill='%23aaa'%3ESản phẩm 2%3C/text%3E%3C/svg%3E"
-             alt="Sản phẩm 2"
-             data-default="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%232d2d3f'/%3E%3Ctext x='200' y='110' font-size='18' text-anchor='middle' fill='%23aaa'%3ESản phẩm 2%3C/text%3E%3C/svg%3E"
-             data-files="product2.jpg,product2.png,product2.jpeg,product2.webp">
-      </div>
-      <div class="product-info">
-        <div class="product-title">Bảng Điều Chỉnh Pro Dành Cho PUBG Mobile</div>
-        <div class="product-desc">Rất Nhiều Tính Năng Chờ Bạn Khám Phá và hơn hết Antiban giúp bạn leo rank không phải thấp thom lo âu và có 3 loại ESP khác nhau.</div>
-        <div class="price-tag">200.000VNĐ THÁNG</div>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-header">Bảng Điều Chỉnh <span> Liên Quân</span></div>
-      <div class="product-image-container">
-        <img class="product-img"
-             src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%232d2d3f'/%3E%3Ctext x='200' y='110' font-size='18' text-anchor='middle' fill='%23aaa'%3ESản phẩm 3%3C/text%3E%3C/svg%3E"
-             alt="Sản phẩm 3"
-             data-default="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%232d2d3f'/%3E%3Ctext x='200' y='110' font-size='18' text-anchor='middle' fill='%23aaa'%3ESản phẩm 3%3C/text%3E%3C/svg%3E"
-             data-files="product3.jpg,product3.png,product3.jpeg,product3.webp">
-      </div>
-      <div class="product-info">
-        <div class="product-title"> Bảng Điều Chỉnh Liên Quân</div>
-        <div class="product-desc"> Hỗ Trợ ESP ẩn Khi Quay Video hoặc live rất phù hợp với những bạn thích live và làm idol hệ thống antiban cao cấp.</div>
-        <div class="price-tag">200.000VNĐ THÁNG</div>
-      </div>
-    </div>
+</div> <!-- Kết thúc container -->
 
-  </div>
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-  <script>
-    (function() {
-      const avatarImage = document.getElementById('avatarImage');
-      const AVATAR_FILES = ['avatar.jpg', 'avatar.png', 'avatar.jpeg', 'avatar.webp', 'avatar.gif'];
-      const avatarDefault = avatarImage.getAttribute('data-default');
+<script>
+const music = document.getElementById("music");
+const savedTime = localStorage.getItem("musicTime");
 
-      function tryLoadImage(imgElement, fileList, defaultSrc) {
-        let index = 0;
-        function tryNext() {
-          if (index >= fileList.length) {
-            imgElement.src = defaultSrc;
-            imgElement.style.display = 'block';
-            return;
-          }
-          const testImg = new Image();
-          testImg.onload = function() {
-            imgElement.src = fileList[index];
-            imgElement.style.display = 'block';
-          };
-          testImg.onerror = function() {
-            index++;
-            tryNext();
-          };
-          testImg.src = fileList[index];
-        }
-        tryNext();
-      }
+if(savedTime){
+    music.currentTime = savedTime;
+}
 
-      tryLoadImage(avatarImage, AVATAR_FILES, avatarDefault);
+document.body.addEventListener(
+"click",
+() => music.play(),
+{once:true}
+);
 
-      const allProductImgs = document.querySelectorAll('.product-img');
-      allProductImgs.forEach(function(img) {
-        const filesAttr = img.getAttribute('data-files');
-        const defaultSrc = img.getAttribute('data-default');
-        if (filesAttr) {
-          const filesList = filesAttr.split(',').map(f => f.trim());
-          tryLoadImage(img, filesList, defaultSrc);
-        }
-      });
-      console.log('Duowq');
-    })();
-  </script>
+setInterval(() => {
+    localStorage.setItem(
+        "musicTime",
+        music.currentTime
+    );
+}, 1000);
+</script>
 </body>
 </html>
